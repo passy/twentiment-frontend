@@ -51,6 +51,12 @@
                     stream.stop();
                 }
             };
+
+            $scope.refresh = function () {
+                twitterSearchStream($scope.query).update(function (promise) {
+                    promise.then(mergeTweets);
+                });
+            }
         }]);
     });
 }());

@@ -24,11 +24,11 @@ value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a
         <div class="navbar-inner">
             <div class="container">
                 <a href="/" class="brand">Twentiment</a>
-                <form class="global-search form-horizontal">
+                <form class="global-search form-horizontal" ng-submit="refresh()">
                     <label for="query" class="control-label"><i class="logo-icon icon-twitter-sign"></i>Search Tweets for</label>
                     <div class="control">
                         <input type="text" name="query" ng-model="query" placeholder="Enter search query …">
-                        <a class="btn btn-info" ng-click="search()"><i class="icon-refresh"></i> Refresh</a>
+                        <a class="btn btn-info" ng-click="refresh()"><i class="icon-refresh"></i> Refresh</a>
                         <ng-switch on="running" ng-cloak>
                             <a ng-switch-when="false" class="btn btn-success" ng-click="start()"><i class="icon-play"></i> Start</a>
                             <a ng-switch-when="true" class="btn btn-warning" ng-click="pause()"><i class="icon-pause"></i> Pause</a>
