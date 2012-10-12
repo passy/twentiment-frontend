@@ -19,6 +19,18 @@
                 },
                 clear = function () {
                     $scope.tweets = [];
+                },
+                makeStream = function () {
+                    lastQuery = $scope.query;
+                    return twitterSearchStream($scope.query);
+                },
+                handleResponsePromise = function (promise) {
+                    promise.then(function (response) {
+                        if (lastQuery !== $scope.query) {
+                            clear();
+                        }
+                        mergeTweets(response);
+                    });
                 };
 
             $scope.tweets = [];
@@ -32,17 +44,12 @@
             $scope.start = function () {
                 $scope.running = true;
 
-                if (lastQuery !== $scope.query) {
-                    clear();
-                }
+                stream = makeStream();
+                stream.start(5000, handleResponsePromise);
+            };
 
-                lastQuery = $scope.query;
-                stream = twitterSearchStream($scope.query);
-                stream.start(5000, function (promise) {
-                    promise.then(function (response) {
-                        mergeTweets(response);
-                    });
-                });
+            $scope.refresh = function () {
+                makeStream().update(handleResponsePromise);
             };
 
             $scope.pause = function () {
@@ -51,12 +58,6 @@
                     stream.stop();
                 }
             };
-
-            $scope.refresh = function () {
-                twitterSearchStream($scope.query).update(function (promise) {
-                    promise.then(mergeTweets);
-                });
-            }
         }]);
     });
 }());
