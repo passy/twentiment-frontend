@@ -19,7 +19,7 @@
 value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a("$filterProvider","register"),controller:a("$controllerProvider","register"),directive:a("$compileProvider","directive"),config:h,run:function(a){d.push(a);return this}};f&&h(f);return g})}})})(window);
         </script>
     </head>
-    <body>
+    <body ng-controller="SearchController">
     <header role="banner" ng-submit="search(query)" class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -28,13 +28,17 @@ value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a
                     <label for="query" class="control-label"><i class="logo-icon icon-twitter-sign"></i>Search Tweets for</label>
                     <div class="control">
                         <input type="text" name="query" ng-model="query" placeholder="Enter search query …">
-                        <a class="btn btn-info" ng-click="search(query)"><i class="icon-refresh"></i> Refresh</a>
+                        <a class="btn btn-info" ng-click="search()"><i class="icon-refresh"></i> Refresh</a>
+                        <ng-switch on="running" ng-cloak>
+                            <a ng-switch-when="false" class="btn btn-success" ng-click="start()"><i class="icon-play"></i> Start</a>
+                            <a ng-switch-when="true" class="btn btn-warning" ng-click="pause()"><i class="icon-pause"></i> Pause</a>
+                        </ng-switch>
                     </div>
                 </form>
             </div>
         </div>
     </header>
-    <div class="container" role="main" ng-controller="SearchController">
+    <div class="container" role="main">
         <ul class="twitter-list unstyled" ng-cloak>
             <div ng-repeat="tweet in tweets">
                 <li class="tweet positive">
