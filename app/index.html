@@ -7,13 +7,26 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat+Alternates:400,700">
         <script src="scripts/vendor/modernizr.min.js"></script>
     </head>
     <body>
-    <div class="container" ng-controller="SearchController">
-        <div class="hero-unit">
-            <h1>Hello, {{ hello }}!</h1>
+    <header role="banner" ng-submit="search(query)" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a href="/" class="brand">Twentiment</a>
+                <form class="global-search form-horizontal">
+                    <label for="query" class="control-label"><i class="logo-icon icon-twitter-sign"></i>Search Tweets for</label>
+                    <div class="control">
+                        <input type="text" name="query" ng-model="query" placeholder="Enter search query …">
+                        <a class="btn btn-info" ng-click="search(query)"><i class="icon-refresh"></i> Refresh</a>
+                    </div>
+                </form>
+            </div>
         </div>
+    </header>
+    <div class="container" role="main" ng-controller="SearchController">
+        Hello, Content! <i class="icon-twitter"></i>
     </div>
 
     <!--[if lt IE 7]>
@@ -32,3 +45,4 @@
     <!-- endbuild -->
     </body>
 </html>
+<!-- vim:tw=140:ft=html: -->
