@@ -1,9 +1,14 @@
 (function () {
     define(['app'], function (app) {
-        app.controller('SearchController', ['$scope', 'twitterSearch',
-                       function ($scope, twitterSearch) {
+        app.controller('SearchController', ['$scope', 'twitterSearchStream',
+                       function ($scope, twitterSearchStream) {
 
-            $scope.hello = "World";
+            var stream = twitterSearchStream("obama").update();
+
+            stream.then(function (response) {
+                $scope.tweets = response.results;
+                console.log("Tweets:", response);
+            });
         }]);
     });
 }());
