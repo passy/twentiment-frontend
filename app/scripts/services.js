@@ -24,14 +24,21 @@
             })
 
             .factory('twitterSearchStream', [
-                     '$q', 'twitterSearch', 'twitterSearchResultFormatter',
-                     function ($q, twitterSearch, formatter) {
+                     '$q', '$timeout', 'twitterSearch',
+                     'twitterSearchResultFormatter',
+                     function ($q, $timeout, twitterSearch, formatter) {
                 return function (query) {
-                    var state = {lastId: 0};
+                    var state = {
+                        lastId: 0,
+                        timeout: null,
+                        autoUpdate: false,
+                        interval: 1500
+                    };
 
                     return {
-                        update: function () {
+                        update: function (callback) {
                             var result,
+                                that = this,
                                 deferred = $q.defer();
 
                             result = twitterSearch.get({
@@ -41,12 +48,41 @@
                                 result.results = formatter.format(result.results);
 
                                 if (result.results && result.results.length) {
-                                    state.lastId = result.results[0].id_str;
+                                    state.lastId = result.max_id;
                                 }
                                 deferred.resolve(result);
                             });
 
+                            if (state.autoUpdate) {
+                                state.timeout = $timeout(function () {
+                                    that.update(callback);
+                                }, state.interval);
+                            }
+
+                            if (callback) {
+                                callback(deferred.promise);
+                            }
+
                             return deferred.promise;
+                        },
+
+                        start: function (interval, callback) {
+                            if (interval) {
+                                state.interval = interval;
+                            }
+
+                            this.stop();
+                            state.autoUpdate = true;
+                            return this.update(callback);
+                        },
+
+                        stop: function () {
+                            // Gosh, being single-threaded can be so nice!
+                            if (state.timeout) {
+                                $timeout.cancel(state.timeout);
+                                state.timeout = null;
+                            }
+                            state.autoUpdate = false;
                         }
                     };
                 };
