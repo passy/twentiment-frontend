@@ -4,7 +4,7 @@
 
   require.config({
     shim: {
-      AngularJS: {
+      angularjs: {
         exports: 'angular'
       },
       underscore: {
@@ -13,12 +13,13 @@
     },
 
   paths: {
-    AngularJS: '../../components/AngularJS/angular',
+    angularjs: '../../components/angularjs/angular',
+    angularjsResource: '../../components/angularjs/angular-resource',
     underscore: '../../components/underscore/underscore'
    }
   });
 
-  require(['AngularJS', 'controller/search'], function (angular) {
-    angular.bootstrap(document, ['twentiment']);
+  require(['angularjs', 'controller/search'], function (angular) {
+    angular.bootstrap(document, ['Twentiment']);
   });
 }());

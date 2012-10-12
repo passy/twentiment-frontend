@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    define(['AngularJS'], function (angular) {
-        return angular.module('twentiment', []);
+    define(['angularjs', 'services'], function (angular) {
+        return angular.module('Twentiment', ['Twitter']);
     });
 }());

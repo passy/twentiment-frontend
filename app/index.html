@@ -27,26 +27,28 @@
     </header>
     <div class="container" role="main" ng-controller="SearchController">
         <ul class="twitter-list unstyled">
-            <li class="tweet positive">
-                <div class="avatar-frame">
-                    <img ng-src="http://a0.twimg.com/profile_images/2502859589/nxqs1t0xa8n5jm1w0c4q_normal.jpeg" class="avatar avatar-60 photo" height="60" width="60" src="http://a0.twimg.com/profile_images/2502859589/nxqs1t0xa8n5jm1w0c4q_normal.jpeg">
-                </div>
+            <div ng-repeat="tweet in tweets">
+                <li class="tweet positive">
+                    <div class="avatar-frame">
+                        <img ng-src="http://a0.twimg.com/profile_images/2502859589/nxqs1t0xa8n5jm1w0c4q_normal.jpeg" class="avatar avatar-60 photo" height="60" width="60" src="http://a0.twimg.com/profile_images/2502859589/nxqs1t0xa8n5jm1w0c4q_normal.jpeg">
+                    </div>
 
-                <div class="body">
-                    <header>
-                        <span class="username">Addy Osmani</span>
-                        <a class="userhandle" href="https://twitter.com/addyosmani" target="_blank">@addyosmani</a>
-                    </header>
-                    <div class="text">The Breakpoint: Episode 1 - We talk Chrome DevTools, Yeoman and AngularJS generators <a href="https://t.co/2FpVcpld">https://t.co/2FpVcpld</a></div>
-                    <footer>
-                        <time class="date" datetime="2006-09-24T05:00-07:00">2006-09-24 07:25</time>
-                    </footer>
-                </div>
+                    <div class="body">
+                        <header>
+                            <span class="username">Addy Osmani</span>
+                            <a class="userhandle" href="https://twitter.com/addyosmani" target="_blank">@addyosmani</a>
+                        </header>
+                        <div class="text">The Breakpoint: Episode 1 - We talk Chrome DevTools, Yeoman and AngularJS generators <a href="https://t.co/2FpVcpld">https://t.co/2FpVcpld</a></div>
+                        <footer>
+                            <time class="date" datetime="2006-09-24T05:00-07:00">2006-09-24 07:25</time>
+                        </footer>
+                    </div>
 
-                <aside class="meta">
-                    <span class="sentiment">0.53</span>
-                </aside>
-            </li>
+                    <aside class="meta">
+                        <span class="sentiment">0.53</span>
+                    </aside>
+                </li>
+            </div>
         </ul>
     </div>
 
