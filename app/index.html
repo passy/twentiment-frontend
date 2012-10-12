@@ -14,6 +14,10 @@
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat+Alternates:400,700">
         <script src="scripts/vendor/modernizr.min.js"></script>
+        <script>
+            (function(i){'use strict';function d(c,b,e){return c[b]||(c[b]=e())}return d(d(i,"angular",Object),"module",function(){var c={};return function(b,e,f){e&&c.hasOwnProperty(b)&&(c[b]=null);return d(c,b,function(){function a(a,b,d){return function(){c[d||"push"]([a,b,arguments]);return g}}if(!e)throw Error("No module: "+b);var c=[],d=[],h=a("$injector","invoke"),g={_invokeQueue:c,_runBlocks:d,requires:e,name:b,provider:a("$provide","provider"),factory:a("$provide","factory"),service:a("$provide","service"),
+value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a("$filterProvider","register"),controller:a("$controllerProvider","register"),directive:a("$compileProvider","directive"),config:h,run:function(a){d.push(a);return this}};f&&h(f);return g})}})})(window);
+        </script>
     </head>
     <body>
     <header role="banner" ng-submit="search(query)" class="navbar navbar-inverse navbar-fixed-top">
@@ -43,7 +47,7 @@
                             <span class="username">{{ tweet.from_user_name }}</span>
                             <a class="userhandle" href="https://twitter.com/{{ tweet.from_user }}" target="_blank">@{{ tweet.from_user }}</a>
                         </header>
-                        <div class="text">{{ tweet.text }}</div>
+                        <div class="text" ng-bind-html-unsafe="tweet.text | linky"></div>
                         <footer>
                             <time class="date" datetime="{{ tweet.created_at }}" title="{{ tweet.created_at }}">{{ tweet.date | date:'dd/MM/yyyy - hh:mm' }}</time>
                         </footer>

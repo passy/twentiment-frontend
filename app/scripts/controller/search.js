@@ -1,5 +1,5 @@
 (function () {
-    define(['app'], function (app) {
+    define(['app', 'angularjsSanitize'], function (app) {
         app.controller('SearchController', ['$scope', 'twitterSearchStream',
                        function ($scope, twitterSearchStream) {
 

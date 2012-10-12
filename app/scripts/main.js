@@ -15,11 +15,12 @@
   paths: {
     angularjs: '../../components/angularjs/angular',
     angularjsResource: '../../components/angularjs/angular-resource',
+    angularjsSanitize: '../../components/angularjs/angular-sanitize',
     underscore: '../../components/underscore/underscore'
    }
   });
 
-  require(['angularjs', 'controller/search'], function (angular) {
+  require(['angularjs', 'angularjsResource', 'controller/search'], function (angular) {
     angular.bootstrap(document, ['Twentiment']);
   });
 }());

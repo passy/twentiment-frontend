@@ -3,6 +3,6 @@
     'use strict';
 
     define(['angularjs', 'services'], function (angular) {
-        return angular.module('Twentiment', ['Twitter']);
+        return angular.module('Twentiment', ['ngSanitize', 'Twitter']);
     });
 }());
