@@ -1,7 +1,9 @@
 (function () {
     define(['app', 'angularjsSanitize'], function (app) {
         app.controller('SearchController', ['$scope', 'twitterSearchStream',
-                       function ($scope, twitterSearchStream) {
+                       'sentimentAnalyzer',
+                       function ($scope, twitterSearchStream,
+                                 sentimentAnalyzer) {
 
             var stream,
                 lastQuery,
@@ -40,6 +42,9 @@
                 $scope.pause();
             });
 
+            $scope.$watch('tweets', function (value) {
+                sentimentAnalyzer.update(value);
+            });
 
             $scope.start = function () {
                 $scope.running = true;

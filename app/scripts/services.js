@@ -12,6 +12,12 @@
                 });
             }])
 
+            .factory('twentimentGuess', ['$resource', function ($resource) {
+                // XXX: What's the best way to make this configurable?
+                // Through require.js?
+                return $resource('http://localhost:port/v1/guess', {port: ':5000'});
+            }])
+
             .factory('twitterSearchResultFormatter', function () {
                 return {
                     format: function (data) {
@@ -22,6 +28,31 @@
                     }
                 };
             })
+
+            .factory('sentimentAnalyzer', ['twentimentGuess', function (guess) {
+                var requestGuess = function (tweet, callback) {
+                        var result,
+                            onResponse = function () {
+                                if (result.label) {
+                                    callback(result);
+                                }
+                            };
+
+                        result = guess.get({message: tweet.text}, onResponse);
+                    }, update = function (tweets) {
+                        _.each(tweets, function (tweet, i) {
+                            if (tweet.score === undefined) {
+                                requestGuess(tweet, function (value) {
+                                    tweets[i].score = value.score;
+                                    tweets[i].sentiment = value.label;
+                                });
+                            }
+                        });
+                    };
+                return {
+                    update: update
+                };
+            }])
 
             .factory('twitterSearchStream', [
                      '$q', '$timeout', 'twitterSearch',

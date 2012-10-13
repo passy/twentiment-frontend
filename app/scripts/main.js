@@ -20,7 +20,7 @@
    }
   });
 
-  require(['angularjs', 'angularjsResource', 'controller/search'], function (angular) {
+  require(['angularjs', 'angularjsResource', 'controller/search', 'directives'], function (angular) {
     angular.bootstrap(document, ['Twentiment']);
   });
 }());

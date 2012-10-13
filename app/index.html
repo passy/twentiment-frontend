@@ -27,7 +27,7 @@ value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a
                 <form class="global-search form-horizontal" ng-submit="refresh()">
                     <label for="query" class="control-label"><i class="logo-icon icon-twitter-sign"></i>Search Tweets for</label>
                     <div class="control">
-                        <input type="text" name="query" ng-model="query" placeholder="Enter search query …">
+                        <input type="text" name="query" ng-model="query" autofocus placeholder="Enter search query …">
                         <a class="btn btn-info" ng-click="refresh()"><i class="icon-refresh"></i> Refresh</a>
                         <ng-switch on="running" ng-cloak>
                             <a ng-switch-when="false" class="btn btn-success" ng-click="start()"><i class="icon-play"></i> Start</a>
@@ -44,7 +44,7 @@ value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a
         </div>
         <ul class="twitter-list unstyled" ng-cloak>
             <div ng-repeat="tweet in tweets">
-                <li class="tweet positive">
+                <li class="tweet {{ tweet.sentiment }}">
                     <div class="avatar-frame">
                         <img ng-src="{{ tweet.profile_image_url }}" class="avatar avatar-60 photo" height="60" width="60">
                     </div>
@@ -61,7 +61,7 @@ value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a
                     </div>
 
                     <aside class="meta">
-                        <span class="sentiment">0.53</span>
+                        <span class="sentiment">{{ tweet.score | score }}</span>
                     </aside>
                 </li>
             </div>
@@ -84,4 +84,3 @@ value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a
     <!-- endbuild -->
     </body>
 </html>
-<!-- vim:tw=140:ft=html: -->
