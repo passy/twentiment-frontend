@@ -23,13 +23,13 @@
                     $scope.tweets = [];
                 },
                 makeStream = function () {
-                    lastQuery = $scope.query;
                     return twitterSearchStream($scope.query);
                 },
                 handleResponsePromise = function (promise) {
                     promise.then(function (response) {
                         if (lastQuery !== $scope.query) {
                             clear();
+                            lastQuery = $scope.query;
                         }
                         mergeTweets(response);
                     });
