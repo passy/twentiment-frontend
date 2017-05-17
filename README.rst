@@ -1,6 +1,10 @@
 Twentiment Frontend
 ===================
 
+.. image:: https://badges.greenkeeper.io/passy/twentiment-frontend.svg
+   :alt: Greenkeeper badge
+   :target: https://greenkeeper.io/
+
 This is a frondend to `twentiment <https://github.com/passy/twentiment>`_.
 It's built with Yeoman and AngularJS, the build is completely broken at the
 moment, though.
